@@ -7,9 +7,9 @@ const instance = axios.create({
 });
 const resolvers = {
   Query: {
-    async getBlocks() {
+    async getBlocks(_parent: undefined, args: { time: number }) {
       try {
-        const resp = await instance.get("/blocks/1573858800000?format=json");
+        const resp = await instance.get(`/blocks/${args.time}?format=json`);
         return resp.data;
       } catch (error) {
         throw error;

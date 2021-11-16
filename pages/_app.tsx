@@ -1,8 +1,10 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
+import { init } from "@sentry/nextjs";
 import type { AppProps } from "next/app";
 
 import fetcher from "../utils/fetcher";
+import constants from "../lib/constants";
 
 const BRAND_COLOR = "#beaaff";
 const theme = extendTheme({
@@ -18,6 +20,12 @@ const theme = extendTheme({
       },
     },
   },
+});
+
+init({
+  dsn: constants.SENTRY_DNS,
+  tracesSampleRate: 0.5,
+  enabled: constants.IS_PROD,
 });
 
 function MyApp({ Component, pageProps }: AppProps) {

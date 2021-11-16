@@ -41,7 +41,7 @@ const typeDefs = gql`
     tx: [Transaction]
   }
   type Query {
-    getBlocks: [Block]
+    getBlocks(time: Float): [Block]
     getBlock(hash: String): SingleBlock
     getTransaction(hash: String): Transaction
   }
